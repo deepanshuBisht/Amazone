@@ -2,18 +2,20 @@ package com.amazone.model;
 
 public class UserDetails {
 
-	private int userId;
+	private String userId;
 	private String name;
 	private String password;
 	private String mailId;
 	private long mobileNo;
 	private String address;
+	private Double wallet;
 
 	public UserDetails() {
 		super();
 	}
 
-	public UserDetails(int userId, String name, String password, String mailId, long mobileNo, String address) {
+	public UserDetails(String userId, String name, String password, String mailId, long mobileNo, String address,
+			Double wallet) {
 		super();
 		this.userId = userId;
 		this.name = name;
@@ -21,21 +23,22 @@ public class UserDetails {
 		this.mailId = mailId;
 		this.mobileNo = mobileNo;
 		this.address = address;
+		this.wallet = wallet;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public String getname() {
+	public String getName() {
 		return name;
 	}
 
-	public void setname(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -47,11 +50,11 @@ public class UserDetails {
 		this.password = password;
 	}
 
-	public String getmailId() {
+	public String getMailId() {
 		return mailId;
 	}
 
-	public void setmailId(String mailId) {
+	public void setMailId(String mailId) {
 		this.mailId = mailId;
 	}
 
@@ -71,10 +74,18 @@ public class UserDetails {
 		this.address = address;
 	}
 
+	public Double getWallet() {
+		return wallet;
+	}
+
+	public void setWallet(Double wallet) {
+		this.wallet = wallet;
+	}
+
 	@Override
 	public String toString() {
 		return "UserDetails [userId=" + userId + ", name=" + name + ", password=" + password + ", mailId=" + mailId
-				+ ", mobileNo=" + mobileNo + ", address=" + address + "]";
+				+ ", mobileNo=" + mobileNo + ", address=" + address + ", wallet=" + wallet + "]";
 	}
-
+	
 }

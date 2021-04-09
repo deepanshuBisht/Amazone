@@ -23,15 +23,15 @@ public class ProductServicesImple implements ProductServices{
 			throw new IdNotFoundException("Invalid ID for Updating Book");
 	}
 
-	public void deleteProduct(int bookId) throws IdNotFoundException {
-		int result = productdao.deleteOneProduct(bookId);
+	public void deleteProduct(int proId) throws IdNotFoundException {
+		int result = productdao.deleteOneProduct(proId);
 		if(result == 0)
 			throw new IdNotFoundException("ID not Found for Delete");
 	}
 
 	public List<ProductDetails> viewAllProduct() {
 		return productdao.findAllProduct().stream()
-				.sorted((p1,p2)->p1.getName().compareToIgnoreCase(p2.getName()))
+				.sorted((p1,p2)->p1.getCategory().compareToIgnoreCase(p2.getCategory()))
 				.collect(Collectors.toList());
 	}
 
