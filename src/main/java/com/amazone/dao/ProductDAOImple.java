@@ -2,7 +2,9 @@ package com.amazone.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.amazone.model.ProductDetails;
@@ -33,7 +35,7 @@ public class ProductDAOImple implements ProductDAO {
 				}
 			DBConnection.closeConnection();
 		}
-		
+
 	}
 
 	public int updateOneProduct(int proId, double price) {
@@ -46,7 +48,8 @@ public class ProductDAOImple implements ProductDAO {
 			statement.setDouble(1, price);
 			statement.setInt(2, proId);
 			result = statement.executeUpdate();
-			System.out.println("Updated \n");
+			if (result == 1)
+				System.out.println("Updated \n");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} finally {
@@ -70,11 +73,12 @@ public class ProductDAOImple implements ProductDAO {
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, proId);
 			result = statement.executeUpdate();
-			System.out.println("Deleted \n");
+			if (result == 1)
+				System.out.println("Deleted \n");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
-		}finally {
-			if(statement != null)
+		} finally {
+			if (statement != null)
 				try {
 					statement.close();
 				} catch (SQLException e) {
@@ -86,9 +90,35 @@ public class ProductDAOImple implements ProductDAO {
 	}
 
 	public List<ProductDetails> findAllProduct() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		String sql = "select * from product";
+		Connection connection = DBConnection.openConnection();
+		PreparedStatement statement = null;
+		List<ProductDetails> productList = new ArrayList<>();
+		try {
+			statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ResultSet rs = statement.executeQuery();
+			while (rs.next()) {
+				int proId = rs.getInt("proId");
+				String name = rs.getString("name");
+				String brand = rs.getString("brand");
+				String category = rs.getString("category");
+				Double price = rs.getDouble("price");
+				ProductDetails product = new ProductDetails(proId, name, brand, category, price);
+				productList.add(product);
+			}
 
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (statement != null)
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			DBConnection.closeConnection();
+		}
+		return productList;
+	}
 
 }

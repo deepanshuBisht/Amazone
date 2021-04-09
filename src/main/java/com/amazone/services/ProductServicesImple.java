@@ -1,6 +1,7 @@
 package com.amazone.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.amazone.dao.ProductDAO;
 import com.amazone.dao.ProductDAOImple;
@@ -29,7 +30,9 @@ public class ProductServicesImple implements ProductServices{
 	}
 
 	public List<ProductDetails> viewAllProduct() {
-		return null;
+		return productdao.findAllProduct().stream()
+				.sorted((p1,p2)->p1.getName().compareToIgnoreCase(p2.getName()))
+				.collect(Collectors.toList());
 	}
 
 }
