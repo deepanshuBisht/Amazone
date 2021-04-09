@@ -28,9 +28,9 @@ public int DAOlogin(String userId, String Password){
 			while(rs.next()) {
 				username = rs.getString("userId");
 				password = rs.getString("password");
+				if(username.equalsIgnoreCase(userId)&&(password.equalsIgnoreCase(Password)))
+					result = 1;
 				}
-			if(username.equalsIgnoreCase(userId)&&(password.equalsIgnoreCase(Password)))
-				result = 1;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} finally {

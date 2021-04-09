@@ -13,7 +13,7 @@ public class ProductDAOImple implements ProductDAO {
 	
 public int DAOlogin(String userId, String Password){
 		
-		String sql = "select userId , password from userdetails where userId = ? and password = ?";	
+		String sql = "select adminId , password from adminDetails where adminId = ? and password = ?";	
 		Connection connection = DBConnection.openConnection();
 		PreparedStatement statement = null;
 		int result = 0;
@@ -25,11 +25,11 @@ public int DAOlogin(String userId, String Password){
 			statement.setString(2, Password);
 			ResultSet rs = statement.executeQuery();
 			while(rs.next()) {
-				username = rs.getString("userId");
+				username = rs.getString("adminId");
 				password = rs.getString("password");
+				if(username.equalsIgnoreCase(userId)&&(password.equalsIgnoreCase(Password)))
+					result = 1;
 				}
-			if(username.equalsIgnoreCase(userId)&&(password.equalsIgnoreCase(Password)))
-				result = 1;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} finally {

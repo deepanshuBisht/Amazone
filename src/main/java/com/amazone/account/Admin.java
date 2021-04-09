@@ -9,7 +9,7 @@ import com.amazone.services.ProductServices;
 import com.amazone.services.ProductServicesImple;
 
 public class Admin {
-	public static void main(String[] args) {
+	public Admin() {
 		Scanner sc = new Scanner(System.in);	
 
 		ProductServices ps = new ProductServicesImple();

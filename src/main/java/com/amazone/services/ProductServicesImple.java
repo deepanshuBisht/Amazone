@@ -19,7 +19,7 @@ public class ProductServicesImple implements ProductServices{
 	public int login(String userId, String Password) throws UserNotFoundException {
 		int result = userDAO.DAOlogin(userId, Password);
 		if(result == 0)
-			throw new UserNotFoundException("User Not Found");
+			throw new UserNotFoundException("Admin Not Found");
 		else {
 			return result;
 		}

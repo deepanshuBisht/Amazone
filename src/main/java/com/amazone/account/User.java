@@ -11,7 +11,8 @@ import com.amazone.services.UserServices;
 import com.amazone.services.UserServicesImple;
 
 public class User {
-	public static void main(String[] args) {
+
+	public User() {
 
 		Scanner sc = new Scanner(System.in);
 		UserServices us = new UserServicesImple();
