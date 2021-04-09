@@ -10,6 +10,39 @@ import java.util.List;
 import com.amazone.model.ProductDetails;
 
 public class ProductDAOImple implements ProductDAO {
+	
+public int DAOlogin(String userId, String Password){
+		
+		String sql = "select userId , password from userdetails where userId = ? and password = ?";	
+		Connection connection = DBConnection.openConnection();
+		PreparedStatement statement = null;
+		int result = 0;
+		String username = null;
+		String password = null;
+		try {
+			statement = connection.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			statement.setString(1, userId);
+			statement.setString(2, Password);
+			ResultSet rs = statement.executeQuery();
+			while(rs.next()) {
+				username = rs.getString("userId");
+				password = rs.getString("password");
+				}
+			if(username.equalsIgnoreCase(userId)&&(password.equalsIgnoreCase(Password)))
+				result = 1;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(statement!=null)
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			DBConnection.closeConnection();
+			}
+		return result;		
+	}
 
 	public void addOneProduct(ProductDetails product) {
 		String sql = "insert into product values(?,?,?,?,?)";

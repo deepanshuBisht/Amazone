@@ -5,12 +5,25 @@ import java.util.stream.Collectors;
 
 import com.amazone.dao.ProductDAO;
 import com.amazone.dao.ProductDAOImple;
+import com.amazone.dao.UserDAO;
+import com.amazone.dao.UserDAOImple;
 import com.amazone.exception.IdNotFoundException;
+import com.amazone.exception.UserNotFoundException;
 import com.amazone.model.ProductDetails;
 
 public class ProductServicesImple implements ProductServices{
 
 	ProductDAO productdao = new ProductDAOImple();
+	UserDAO userDAO = new UserDAOImple();
+	
+	public int login(String userId, String Password) throws UserNotFoundException {
+		int result = userDAO.DAOlogin(userId, Password);
+		if(result == 0)
+			throw new UserNotFoundException("User Not Found");
+		else {
+			return result;
+		}
+	}
 	
 	public void addProduct(ProductDetails product) {
 		productdao.addOneProduct(product);
