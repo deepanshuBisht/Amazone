@@ -2,8 +2,9 @@ package com.amazone.model;
 
 public class ProductDetails {
 
-	private int ProId;
+	private int proId;
 	private String name;
+	private String brand;
 	private String category;
 	private Double price;
 
@@ -11,20 +12,21 @@ public class ProductDetails {
 		super();
 	}
 
-	public ProductDetails(int proId, String name, String category, Double price) {
+	public ProductDetails(int proId, String name, String brand, String category, Double price) {
 		super();
-		this.ProId = proId;
+		this.proId = proId;
 		this.name = name;
+		this.brand = brand;
 		this.category = category;
 		this.price = price;
 	}
 
 	public int getProId() {
-		return ProId;
+		return proId;
 	}
 
 	public void setProId(int proId) {
-		ProId = proId;
+		this.proId = proId;
 	}
 
 	public String getName() {
@@ -33,6 +35,14 @@ public class ProductDetails {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 	public String getCategory() {
@@ -53,8 +63,8 @@ public class ProductDetails {
 
 	@Override
 	public String toString() {
-		return "ProductDetails [ProId=" + ProId + ", name=" + name + ", category=" + category + ", price=" + price
-				+ "]";
+		return "ProductDetails [proId=" + proId + ", name=" + name + ", brand=" + brand + ", category=" + category
+				+ ", price=" + price + "]";
 	}
-
+	
 }
